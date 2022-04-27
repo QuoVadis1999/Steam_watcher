@@ -7,7 +7,6 @@ import sys
 from datetime import datetime, timedelta
 from .utils import *
 
-
 CONFIG = load_config()
 BOT = CONFIG['BOT']
 ATBOT = f'[CQ:at,qq={BOT}]'
@@ -18,6 +17,7 @@ qunyou = '群友'
 MEMBER = os.path.expanduser('~/.Steam_watcher/member.json')
 
 DEFAULT_DATA = {}
+
 
 class Whois:
     def __init__(self, **kwargs):
@@ -40,7 +40,6 @@ class Whois:
         if msg.startswith(ATBOT):
             msg = msg[len(ATBOT):].strip()
             atbot = True
-
 
         if msg == '查询群友':
             data = loadjson(MEMBER)
@@ -83,11 +82,10 @@ class Whois:
         if re.search('我(什么|谁|啥)(也|都)不是', msg) and atbot:
             return self.del_all_alias(group, user)
 
-
     def whois(self, group, user, obj):
         object = self.object_explainer(group, user, obj)
         name = object['name']
-        uid  = object['uid']
+        uid = object['uid']
         data = loadjson(MEMBER)
         if name == '我':
             obj = name
@@ -111,7 +109,6 @@ class Whois:
                 return f'{name}是{"，".join(data[group][uid][1:])}！'
         else:
             return f'{obj}是{data[group][uid][0]}'
-
 
     def alias_equals(self, group, user, obj1, obj2):
         data = loadjson(MEMBER)
@@ -150,7 +147,6 @@ class Whois:
                 '不知道，毕竟我只是一只小猫咪',
                 'それはどうかな…',
             ])
-
 
     def add_alias(self, group, user, subject, object):
         if not object:
@@ -196,18 +192,16 @@ class Whois:
             sbj["name"] = subject
         return f'好，现在{sbj["name"]}是{object}了'
 
-
     def set_default_alias(self, group, user, name):
         if self.add_alias(group, user, '我', name) == '不准套娃':
             return '不准套娃'
         data = loadjson(MEMBER)
         data[group][user].remove(name)
-        data[group][user] = [name,] + data[group][user]
+        data[group][user] = [name, ] + data[group][user]
         with open(MEMBER, 'w', encoding='utf8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
         self._update()
         return f'好的，{name}'
-
 
     def del_alias(self, group, user, name):
         data = loadjson(MEMBER)
@@ -248,7 +242,6 @@ class Whois:
         else:
             return f'{sbj["name"]}本来就不是{name}'
 
-
     def del_all_alias(self, group, user):
         data = loadjson(MEMBER)
         if group not in data:
@@ -265,7 +258,6 @@ class Whois:
             self._update()
             return f'好，你不再是{"，".join(to_del)}了'
 
-
     def _update(self):
         data = loadjson(MEMBER)
         self._rosters = {}
@@ -275,7 +267,6 @@ class Whois:
                 for name in data[group][user]:
                     if name.lower() not in self._rosters[group]:
                         self._rosters[group][name.lower()] = user
-
 
     def get_uid(self, group, obj):
         ''' 如果obj是at，返回obj中的uid '''
@@ -294,7 +285,6 @@ class Whois:
                 return self._rosters[group][obj.lower()]
         ''' 找不到，返回UNKNOWN '''
         return UNKNOWN
-
 
     def object_explainer(self, group, user, obj) -> dict:
         '''
