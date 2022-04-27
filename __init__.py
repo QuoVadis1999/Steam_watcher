@@ -7,9 +7,9 @@ __all__ = [
 ]
 
 default_config = {
-    'ADMIN': '',
-    'BOT': '',
-    'STEAM_APIKEY': '',
+    'ADMIN': '181317827',
+    'BOT': '1652407810',
+    'STEAM_APIKEY': '4F5B9A5734F310B9301BFE840FD905A7',
 }
 
 config_path = os.path.join(
