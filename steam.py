@@ -895,7 +895,7 @@ class Dota2:
         tosend.append('持续时间: {:.0f}分{:.0f}秒'.format(duration / 60, duration % 60))
         tosend.append('游戏模式: [{}/{}]'.format(mode, lobby))
 
-        fp = os.open(os.path.join(DEBUG_MESSAGE, str(match_id)), 'w')
+        fp = os.open(os.path.join(DEBUG_MESSAGE, match_id), 'w')
 
 
         for i in players:
