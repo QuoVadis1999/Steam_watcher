@@ -19,6 +19,7 @@ ATBOT = f'[CQ:at,qq={BOT}]'
 UNKNOWN = None
 IDK = '我不知道'
 MAX_ATTEMPTS = 5
+DEBUG_MESSAGE = os.path.expanduser('~/.Steam_watcher/debug_msg/')
 MEMBER = os.path.expanduser('~/.Steam_watcher/member.json')
 STEAM = os.path.expanduser('~/.Steam_watcher/steam.json')
 IMAGES = os.path.expanduser('~/.Steam_watcher/images/')
@@ -894,6 +895,9 @@ class Dota2:
         tosend.append('持续时间: {:.0f}分{:.0f}秒'.format(duration / 60, duration % 60))
         tosend.append('游戏模式: [{}/{}]'.format(mode, lobby))
 
+        fp = os.open(os.path.join(DEBUG_MESSAGE, str(match_id)), 'w')
+
+
         for i in players:
             personaname = i['personaname']
             hero = random.choice(HEROES_CHINESE[i['hero']]) if i['hero'] in HEROES_CHINESE else '不知道什么鬼'
@@ -925,8 +929,13 @@ class Dota2:
                           .format(kda, kills, deaths, assists, gpm, xpm,
                               last_hits, damage, damage_rate,
                               participation, deaths_rate)
+            fp.write(evaluation_str)
+            fp.write('\n')
+            fp.write(data_detail)
+            fp.write('\n')
 
             tosend.append(', '.join(evaluation_str, data_detail))
+        fp.close()
         return '\n'.join(tosend)
 
     def generate_match_image(self, match_id):

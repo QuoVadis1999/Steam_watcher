@@ -22,5 +22,6 @@ if not os.path.exists(config_path):
 mkdir_if_not_exists(os.path.expanduser('~/.Steam_watcher'))
 mkdir_if_not_exists(os.path.expanduser('~/.Steam_watcher/fonts'))
 mkdir_if_not_exists(os.path.expanduser('~/.Steam_watcher/images'))
+mkdir_if_not_exists(os.path.expanduser('~/.Steam_watcher/debug_msg'))
 
 from .steam import Steam
