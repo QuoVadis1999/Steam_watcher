@@ -934,7 +934,7 @@ class Dota2:
             fp.write(data_detail)
             fp.write('\n')
 
-            tosend.append(', '.join(evaluation_str, data_detail))
+            tosend.append(', '.join([evaluation_str, data_detail]))
         fp.close()
         return '\n'.join(tosend)
 
