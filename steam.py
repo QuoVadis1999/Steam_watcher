@@ -41,6 +41,7 @@ DEFAULT_DATA = {
 
 MAGIC = 76561197960265728
 JIANGE_ID = '191299708'
+GANGSHEN_ID = '136386250'
 
 def IdHash(id3: int):
     return id3 + MAGIC
@@ -48,6 +49,9 @@ def IdHash(id3: int):
 
 def is_jiange(id):
     return str(id) == JIANGE_ID
+
+def is_gangshen(id):
+    return str(id) == GANGSHEN_ID
 
 class Steam:
     Passive = True
@@ -573,6 +577,7 @@ class Steam:
 
     def clear_matches(self):
         print(datetime.now().strftime('[%Y-%m-%d %H:%M:%S]'), '清理本地保存的比赛分析数据和战报图片')
+
         try:
             cnt = len(os.listdir(DOTA2_MATCHES))
             size = 0
