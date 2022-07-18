@@ -813,6 +813,7 @@ ITEMS = {
     835:  "paintball",
     837:  "heavy_blade",
     840:  "pogo_stick",
+    908:  "wraith_pact",
     931:  "boots_of_bearing",
     1021: "river_painter",
     1022: "river_painter2",
@@ -830,7 +831,7 @@ ITEMS = {
 }
 
 ITEM_SLOTS = ['item_0', 'item_1', 'item_2', 'item_3', 'item_4', 'item_5', 'item_neutral']
-
+BACKPACK_SLOTS = ['backpack_0', 'backpack_1', 'backpack_2']
 SLOT = ['Radiant', 'Dire']
 SLOT_CHINESE = ['天辉', '夜魇']
 

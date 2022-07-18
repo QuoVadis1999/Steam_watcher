@@ -1139,6 +1139,14 @@ class Dota2:
                 shard = 0
                 image.paste(Image.new('RGB', (252, 32), (192, 192, 192)), (474, 171 + slot * 60 + idx * 65))
                 p['purchase_log'].reverse()
+                for backpack in BACKPACK_SLOTS:
+                    if p[backpack] == 0:
+                        backpack_img = Image.new('RGB', (28, 21), (192, 192, 192))
+                    else:
+                        backpack_img = self.get_image('{}_lg.png'.format(ITEMS.get(p[backpack])))
+                    backpack_img = backpack_img.resize((28, 21), Image.ANTIALIAS)
+                    image.paste(backpack_img,
+                                (475 + 30 * BACKPACK_SLOTS.index(backpack), 172 + slot * 60 + idx * 65 + 32))
                 for item in ITEM_SLOTS:
                     if p[item] == 0:
                         item_img = Image.new('RGB', (40, 30), (128, 128, 128))
